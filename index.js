@@ -95,9 +95,9 @@ const getWinners = (callback) => callback.map(function(item){
   if(item["Home Team Goals"] > item["Away Team Goals"]){
       return item["Home Team Name"]
   }
-  else if(item["Home Team goals"] < item['Away Team Goals']){
+  else (item["Home Team goals"] < item['Away Team Goals'])
       return item["Away Team Name"]
-  }
+  
 
 
 
@@ -111,21 +111,49 @@ Parameters:
  * callback function getYears
  */
 
-function getWinnersByYear(callback1, callback2){
-    for (i=0; i < 20; i++){
-        return `In ${callback2}, ${callback1} won the world cup!`
+function getWinnersByYear(callback1, callback2, data){
+    const winnersYears = [];
+    const years = callback2(data);
+    const winners = callback1(data);
+    for (let i = 0; i < 20; i++){
+        winnersYears.push(`In ${years[i]}, ${winners[i]} won the world cup!`);
     }
-    
-
+    return winnersYears;
 };
+console.log(getWinnersByYear(getWinners, getYears, fifaData));
+ 
+// function getWinnersByYear(func1, func2){
+//     const result = [];
+//     const winners = func1;
+//     const years = func2;
+//     for (let i = 0; i< 20; i++) {
+//         result.push(`In ${years[i]}, ${winners[i]} won the world cup!`);
+//     }
+//     return result;
+//  };
 
-console.log(getWinnersByYear(getWinners(getFinals(fifaData),(getYears(getFinals(fifaData))))));
+// function getWinnersByYear(country, year, data) {
+//     const country = getWinners(getFinals, data);
+//     const year = getYears(getFinals, data);
+//     const allWinners = [];
+//     getFinals(data).forEach((item, i) =>{
+//         allWinners.push(`In ${year[i]}, ${country[i]} won the world cup!`)
+//     });
+//     return allWinners;
+// };
+// console.log(getWinnersByYear(getWinners, getYears, fifaData))
+
+//console.log(getWinnersByYear(getWinners(getFinals(fifaData))),(getYears(getFinals(fifaData))));
+
+
+
 
 /* Task 7: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
 const getAverageGoals = (data) => data.reduce(function(accumulator, item){
-    return (accumulator + item["Home Team Goals"]) / item["Home Team Goals"].length
-    (accumulator + item["Away Team Goals"]) / item["Away Team Goals"].length;
+    return (accumulator + item["Home Team Goals"]) / item.length;
+    
+   
 
 
 
